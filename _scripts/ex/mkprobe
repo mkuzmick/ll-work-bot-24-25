@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Check if an argument is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <input_filename>"
+  exit 1
+fi
+
+# Input filename from the command-line argument
+input_filename="$1"
+
+# Output filename based on the input filename
+output_filename="${input_filename%.*}.json"
+
+# Run ffprobe to get JSON data for all streams and save it to the output file
+ffprobe -v quiet -print_format json -show_streams "$input_filename" > "$output_filename"
+
+echo "JSON data for streams saved to $output_filename"
