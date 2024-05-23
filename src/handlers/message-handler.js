@@ -8,43 +8,25 @@ const llog = require('learninglab-log')
 // const pokemonBotIcon = "https://files.slack.com/files-pri/T0HTW3H0V-F069XBVK6GP/elle.l.studio_pikachu_on_a_white_background_9c17635e-ea6e-47af-a191-95af2681a39d.jpg?pub_secret=27b8f2167e"
 // const mkWorkBot = require('../bots/production/mk-work-bot');
 
-// const studentBots = [
-//     {name: "Pikachu", imageUrl: "https://files.slack.com/files-pri/T0HTW3H0V-F069XBVK6GP/elle.l.studio_pikachu_on_a_white_background_9c17635e-ea6e-47af-a191-95af2681a39d.jpg?pub_secret=27b8f2167e"},
-//     {name: "Billowing Sail", imageUrl: "https://files.slack.com/files-pri/T0HTW3H0V-F06J9EFH08J/billowing-sail.jpg?pub_secret=c7f7f627c1"},
-//     {name: "Petal Pink", imageUrl: "https://files.slack.com/files-pri/T0HTW3H0V-F06HUTBU2FR/petal-pink.jpg?pub_secret=0c1edb0843"}
-// ]
-
-const testingBot = require('../bots/the-meta-bots/testing-bot.js');
+const loggerBot = require('../bots/the-meta-bots/logger.js');
+const directorBot = require('../bots/the-meta-bots/director.js');
+const personalWorkBots = require('../bots/personal-workbots.js');
+const s24WorkBots = require('../bots/s24-work-bots.js');
 
 exports.testing = async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
     await say(`the bot is running, <@${message.user}>!`);
 }
 
-exports.parseAll = async ({ client, message, say }) => {
-
-    llog.magenta(`parsing all messages, including this one from ${message.channel}`);
-    // let directorResult = await directorBot.respondToMessage({ client, message, say });
+exports.parseAll = async ({ client, message, say, event }) => {
+    const loggerBotResult = await loggerBot({ client, message, say, event });
+    const directorResult = await directorBot({ client, message, say, event });
     if ( message.channel_type == "im" ) {
-        llog.magenta(`handling message because ${message.channel} is a DM`)
-        llog.yellow(message)
-        let result = await client.conversations.history({channel: message.channel, limit: 10})
-        llog.magenta(result)
-        // let openAiResult = await howStudentsLearnResponse({ text: message.text, messages: result.messages });
-        // llog.magenta(openAiResult)
-
-        let slackResult = await client.chat.postMessage({
-            channel: message.channel,
-            text: `We are a group of bots, and we'll be at work responding to your message later: ${message.text}`,
-            // icon_url: randomBot.imageUrl,
-            // username: randomBot.name
-        });
-
+       const personalWorkBotsResult = await personalWorkBots({ client, message, say });
+    } else if ( message.channel == process.env.SLACK_WORK_CHANNEL) {
+        llog.cyan(`handling message because ${message.channel} is the summer work channel`);
+        const workBotResult = await ({ client, message });
     } 
-    // else if ( message.channel == process.env.SLACK_HSL_BOT_CHANNEL) {
-    //     llog.cyan(`handling message because ${message.channel} is the HSL bot channel`);
-    //     const hslBotResult = await howStudentsLearnResponse({ client, message });
-    // } 
     
     else {
         llog.magenta(`some other message we aren't handling now--uncomment message-handler line 27 to get the json`)

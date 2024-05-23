@@ -5,4 +5,4 @@
 // module.exports.mkWorkBot = require("./production/mk-work-bot/index.js");
 // module.exports.ridingHoodBot = require("./production/riding-hood-bot/index.js");
 
-module.exports.testingBot = require("./the-meta-bots/testing-bot.js");
+module.exports.testingBot = require("./the-meta-bots/logger.js");
