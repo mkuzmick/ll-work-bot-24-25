@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "a bot that helps the ll work",
   "main": "index.js",
+  "bin": {
+    "llw": "./cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev nodemon ./app.js",
@@ -12,11 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/mkuzmick/ll-work-bots-24-25.git"
   },
-  "keywords": [
-    "slack",
-    "bot",
-    "ai"
-  ],
+  "keywords": ["slack", "bot", "ai"],
   "author": "mk",
   "license": "ISC",
   "bugs": {
