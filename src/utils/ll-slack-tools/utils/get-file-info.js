@@ -12,7 +12,6 @@ const getFileInfo = async ({ file }) => {
         file: file,
       },
     });
-
     if (response.data.ok) {
       llog.cyan(response.data);
       return response.data.file;
