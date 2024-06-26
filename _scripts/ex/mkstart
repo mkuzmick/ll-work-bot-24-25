@@ -1,15 +1,12 @@
 #!/bin/bash
 
-
-open -a Terminal "/Users/mk/Development/ll-show-24-25" && sleep 1
-code "/Users/mk/Development/ll-show-24-25"
+open -a Terminal "/Users/mk/Development/mk-paths-week" && sleep 1
+code "/Users/mk/Development/mk-paths-week"
 osascript -e 'tell application "Terminal" to do script "npm run dev" in front window'
 
-
-open -a Terminal "/Users/mk/Development/ll-work-bots-24-25" && sleep 2
+open -a Terminal "/Users/mk/Development/ll-work-bots-24-25" && sleep 1
 zed "/Users/mk/Development/ll-work-bots-24-25"
 osascript -e 'tell application "Terminal" to do script "npm run dev" in front window'
-
 
 open -a Firefox "http://localhost:3000"
 

@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/mkuzmick/ll-work-bots-24-25#readme",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.0",
     "@slack/bolt": "^3.18.0",
     "airtable": "^0.12.2",
     "axios": "^1.7.1",
